@@ -6,8 +6,8 @@ from kivy.clock import Clock
 from network import NetworkManager
 
 class MainDashboard(BoxLayout):
-    def _init_(self, **kwargs):
-        super(MainDashboard, self)._init_(**kwargs)
+    def __init__(self, **kwargs):
+        super().__init_(**kwargs)
         self.orientation = 'vertical'
         self.padding = 30
         self.spacing = 20
@@ -47,5 +47,5 @@ class CyberApp(App):
     def build(self):
         return MainDashboard()
 
-if __name__ == _mai_":
+if __name__ == __mai__":
     CyberApp().run()
