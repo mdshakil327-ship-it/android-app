@@ -3,7 +3,7 @@ import threading
 import time
 
 class NetworkManager:
-    def _init_(self, targets=None, port=12345):
+    def __init__(self, targets=None, port=12345):
         self.targets = targets or ["10.226.24.104", "127.0.0.1"]
         self.port = port
         self.socket = None
