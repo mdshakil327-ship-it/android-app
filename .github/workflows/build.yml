@@ -1,7 +1,35 @@
-- name: Direct License Bypass & Build APK
+name: Build Android APK
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install System Dependencies
         run: |
-          # 1. Check karein ki spec file hai ya nahi, aur license add karein
+          sudo apt-get update
+          sudo apt-get install -y git zip unzip openjdk-17-jdk autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libsqlite3-dev libssl-dev libffi-dev libltdl-dev ant
+          python -m pip install --upgrade pip
+          pip install buildozer cython
+
+      - name: Direct License Bypass & Build APK
+        run: |
+          # Accept SDK license and build directly using existing spec file
           echo "android.accept_sdk_license = True" >> buildozer.spec
-          
-          # 2. Seedha APK build karein (init nahi chalana hai)
           buildozer android debug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-apk
+          path: bin/*.apk
