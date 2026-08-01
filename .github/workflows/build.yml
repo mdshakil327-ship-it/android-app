@@ -16,7 +16,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: "3.11"
 
       - name: Set up Java
         uses: actions/setup-java@v4
@@ -32,10 +32,8 @@ jobs:
       - name: Install Buildozer
         run: |
           python -m pip install --upgrade pip
+          pip install "setuptools<70"
           pip install buildozer==1.5.0 Cython==0.29.36
-
-      - name: Accept Android licenses
-        run: yes | buildozer android accept_sdk_license
 
       - name: Build APK
         run: buildozer -v android debug
