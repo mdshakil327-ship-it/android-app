@@ -4,6 +4,7 @@ package.name = cyberapp
 package.domain = org.cyber
 source.dir = .
 source.exts = py,png,jpg,kv,atlas
+source.exclude_dirs = tests, bin, venv, .github, kivy, .git, build, .buildozer
 version = 1.0
 
 requirements = python3,kivy
